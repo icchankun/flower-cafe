@@ -1,0 +1,362 @@
+@charset "UTF-8";
+
+/*--------------------------------
+ CSSリセット
+---------------------------------*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+ 
+  &::before {
+    box-sizing: border-box;
+    }
+
+  &::after {
+    box-sizing: border-box;
+    }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 100%;
+  font-weight: normal;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: bottom;
+}
+
+li {
+  list-style-type: none;
+}
+
+/*--------------------------------
+ 全体
+---------------------------------*/
+
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 16px;
+  line-height: 1;
+  color: #333;
+}
+  
+a {
+  text-decoration: none;
+  font-family: 'EB Garamond';
+  color: #333;
+  &:hover {
+    opacity: .7;
+  }
+}
+
+/*--------------------------------
+ヘッダー
+---------------------------------*/
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  padding: 15px;
+  .pc-menu {
+    display: none;
+  }
+}
+
+#sp-menu {
+  width: 48px;
+  height: 48px;
+  background: #C32D4D;
+  border-radius: 0 0 0 4px;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 20;
+
+  @mixin base {
+    display: inline-block;
+    transition: all .4s;
+    box-sizing: border-box;
+  }
+  
+  .menu-trigger {
+    position: absolute;
+    top: 9.5px;
+    position: relative;
+    width: 28px;
+    height: 18px;
+    background: none;
+    border: none;
+    appearance: none;
+    cursor: pointer;
+    @include base;
+
+    &.active span {
+      &:nth-of-type(1) {
+        transform: translateY(8px) rotate(45deg);
+      }
+      &:nth-of-type(2) {
+        opacity: 0;
+      }
+      &:nth-of-type(3) {
+        transform: translateY(-8px) rotate(-45deg);
+      }
+    }
+    
+    span {
+      position: absolute;
+      left: 0px;
+      width: 100%;
+      height: 1.5px;
+      background-color: #fff;
+      border-radius: 2px;
+      @include base;
+    }
+    
+    span {
+      &:nth-of-type(1) {
+        top: 0;
+      }
+      &:nth-of-type(2) {
+        top: 8.5px;
+      }
+      &:nth-of-type(3) {
+        bottom: 0;
+      }
+    }
+  }
+}
+
+/*--------------------------------
+ オーバーレイ
+---------------------------------*/
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  text-align: center;
+  background: #C32D4D;
+  opacity: 0;
+  pointer-events: none; 
+  transition: opacity .6s;
+  z-index: 10;
+
+  nav {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+
+  a {
+    color: #fff;
+    font-size: 20px;
+    line-height: 2.4em;
+  }
+
+  li:nth-child(2) a{
+    color: #EF90A4;
+  }
+
+  &.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+}
+
+/*--------------------------------
+ メインビジュアル
+---------------------------------*/
+.main-visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("../img02/bg-page-header_sp.png");
+  background-repeat: no-repeat; 
+  background-size: cover;
+  background-position: center center;
+  height: 160px;
+  .text {
+    h2 {
+      font-size: 32px;
+      line-height: 1em;
+      font-family: 'EB Garamond';
+      color: #C32D4D;
+      text-shadow: 0 3px 7px rgba(195,45,77,.2);
+    }
+
+    p {
+      font-size: 11px;
+      text-align: center;
+    }
+  }
+}
+
+/*--------------------------------
+ コンテンツ
+---------------------------------*/
+.menu.section {
+  padding: 40px 0;
+  .container {
+    padding: 0 20px;
+    .menu-list {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: -20px;
+      .menu-item {
+        width: calc((100% - 30px) / 2);
+        margin-bottom: 25px;
+        .menu-img {
+          max-width: 100%;
+          margin-bottom: 10px;
+        }
+        .menu-title {
+          color: #BA4862;
+          margin-bottom: 5px;
+        }
+        .menu-price {
+          font-family: "EB Garamond";
+          font-size: 14px;
+        }
+      }
+    }
+  }  
+}
+/*--------------------------------
+ フッター
+---------------------------------*/
+.footer {
+  height: 137px;
+  font-family: 'EB Garamond';
+  background: #C32D4D;
+  padding: 40px 20px;
+  .footerNav {
+    margin-bottom: 20px;
+    .footerNav-list {
+      display: flex;
+      justify-content: center;
+      :not(:last-child) {
+        margin-right: 30px;
+      }
+  
+      a {
+        color: #fff;
+        font-size: 16px;
+        line-height: 2.4em;
+      }
+    }
+  }
+
+  .copyright {
+    color: #F9B1C0;
+    font-size: 12px;
+    text-align: center;
+  }
+}
+
+/*--------------------------------
+ レスポンシブデザイン
+---------------------------------*/
+@media (min-width: 700px) {
+  .header {
+    padding: 30px;
+    .logo {
+      img {
+        width: 170px;
+      }
+    }
+    .pc-menu {
+      display: block;
+      .pc-menuNav-list {
+        display: flex;
+        .pc-menuNav-item {
+          &:not(:last-child) {
+            margin-right: 35px;
+          }
+
+          &:nth-child(2) a {
+            color: #C32D4D;
+          }
+
+          a {
+            color: #000;
+            font-size: 20px;
+          }
+        }
+      }
+    }
+  }
+
+  .main-visual {
+    background-image: url("../img02/bg-header_pc.png"); 
+    height: 200px;
+    .text {
+      h2 {
+        font-size: 48px;
+        .and {
+          font-size: 64px;
+        }
+      }
+      p {
+        font-size: 14px;
+      }
+    }
+  }
+
+  #sp-menu {
+    display: none;
+  }
+
+  .menu.section {
+    padding: 70px 0;
+    .container {
+      max-width: 1170px;
+      padding: 0 30px;
+      margin: 0 auto;
+      .menu-list {
+        display: flex;
+        justify-content: flex-start;
+        margin-bottom: -50px;
+        .menu-item {
+          width: calc((100% - 60px) / 3);
+          margin-right: 30px;
+          margin-bottom: 50px;
+          &:nth-child(3n) {
+            margin-right: 0;
+          }
+        }
+      }
+    }  
+  }
+
+  .footer {
+    height: 167px;
+    .footerNav {
+      .footerNav-list {
+        a {
+          font-size: 20px
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
